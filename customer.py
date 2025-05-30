@@ -33,5 +33,5 @@ class Customer:
         self._email = email
 
     def __str__(self):
-        return f'Customer: {self.name} (ID: {self.customer_id})'
+        return f'Customer: {self.name}, Telephone Number: {self._telephone_number} (ID: {self.customer_id})'
 
