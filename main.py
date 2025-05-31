@@ -6,7 +6,27 @@ from service import Service
 from employee import Employee
 from appointment import Appointment
 
+def display_menu():
+    print('1. Add Customer')
+    print('2. Add Employee')
+    print('3. Add Service')
+    print('4. Book Appointment')
+    print('5. Quit \n')
+
+    return input('Enter your selectio 1-5 \n')
+
+
 if __name__ == '__main__':
+
+    running = True
+
+    while running:
+        option = display_menu()
+
+        if option == '5'5:
+            running = False
+
+
 
     shop = BarberShop('JanoCutz')
     new_customer = Customer(len(shop.customers) + 1, "Mark Janovitz", "9059250766", "mjanovitz@outlook.com")
