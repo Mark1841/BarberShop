@@ -1,4 +1,5 @@
 import datetime
+from unittest import case
 
 from barberShop import BarberShop
 from customer import Customer
@@ -6,7 +7,7 @@ from service import Service
 from employee import Employee
 from appointment import Appointment
 
-def display_menu():
+def get_action():
     print('1. Add Customer')
     print('2. Add Employee')
     print('3. Add Service')
@@ -18,35 +19,21 @@ def display_menu():
 
 if __name__ == '__main__':
 
+    shop = BarberShop('JanoCutz')
     running = True
 
     while running:
-        option = display_menu()
-
-        if option == '5'5:
-            running = False
-
-
-
-    shop = BarberShop('JanoCutz')
-    new_customer = Customer(len(shop.customers) + 1, "Mark Janovitz", "9059250766", "mjanovitz@outlook.com")
-    shop.add_customer(new_customer)
-
-    new_service = Service(len(shop.services) + 1, "The Beard Trim", "Reduce beard length, outline neck and cheeks", 30, 39.80)
-    shop.add_service(new_service)
-
-    new_employee = Employee(len(shop.employees) +1, "Jane Smith", "9051234567", True)
-    shop.add_employee(new_employee)
-
-    new_employee = Employee(len(shop.employees) +1, "Dave Johnson", "9054321923", False)
-    shop.add_employee(new_employee)
-
-    new_appointment = Appointment(shop.customers[0], shop.employees[0], datetime.datetime(2025,5,30), 'Error')
-    print(new_appointment.customer)
-    print(new_appointment.status)
-
-    new_appointment.status = "error2" #setter only being called here, not at object creation
-    print(new_appointment.status)
+        match get_action():
+            case '1':
+                shop.add_customer()
+            case '2':
+                shop.add_employee()
+            case '3':
+                pass
+            case '4':
+                pass
+            case '5':
+                running = False
 
     for customer in shop.customers:
         print(customer)

@@ -3,8 +3,8 @@ class Customer:
 
     def __init__(self, customer_id, name, telephone_number, email):
         self.customer_id = customer_id
-        self._name = name
-        self._telephone_number = telephone_number
+        self.name = name
+        self.telephone_number = telephone_number
         self._email = email
         self.appointment_history = []
 
