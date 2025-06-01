@@ -29,7 +29,7 @@ if __name__ == '__main__':
             case '2':
                 shop.add_employee()
             case '3':
-                pass
+                shop.add_service()
             case '4':
                 pass
             case '5':
