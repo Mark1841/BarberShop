@@ -1,11 +1,4 @@
-import datetime
-from unittest import case
-
 from barberShop import BarberShop
-from customer import Customer
-from service import Service
-from employee import Employee
-from appointment import Appointment
 
 def get_action():
     print('1. Add Customer')
@@ -31,7 +24,7 @@ if __name__ == '__main__':
             case '3':
                 shop.add_service()
             case '4':
-                pass
+                shop.add_appointment()
             case '5':
                 running = False
 
@@ -42,7 +35,8 @@ if __name__ == '__main__':
         if employee.active:
             print(employee)
 
-
+    for appointment in shop.appointments:
+        print(appointment)
 
 
 

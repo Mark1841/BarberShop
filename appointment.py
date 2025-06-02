@@ -19,5 +19,5 @@ class Appointment:
             self._status = status
 
     def __str__(self):
-        return f'Customer: {self.customer}, Service: {self._service} (ID: {self.customer_id})'
+        return f'Customer: {self.customer.name}, Service: {self.service.name} Staff Member: {self.employee.name}, Date: {self.date})'
 

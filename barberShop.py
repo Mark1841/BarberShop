@@ -52,7 +52,7 @@ class BarberShop:
         new_employee = Employee(employee_id, name, telephone_number, True)
         self.employees.append(new_employee)
 
-    def add_service(self, service):
+    def add_service(self):
         """ Adds a service to the shop """
         service_id = len(self.services) + 1
         name = input('Enter service name: ')
@@ -62,7 +62,7 @@ class BarberShop:
         new_service = Service(service_id, name, description, price, duration)
         self.services.append(new_service)
 
-    def add_appointment(self, appointment):
+    def add_appointment(self):
         """ Adds an appointment to the shop """
         customer = self.find_customer(input('Enter customers name: '))
         service = self.find_service(input('Enter the service the customer wants: '))
