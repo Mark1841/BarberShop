@@ -2,16 +2,16 @@ from appointment import Appointment
 from customer import Customer
 from employee import Employee
 from service import Service
-
+from dataHandler import load_customers, load_employees
 
 class BarberShop:
     """ Class to manage the day-to-day operations at the store"""
 
     def __init__(self, name):
         self.name = name # Name of the barber shop
-        self.customers = []
+        self.customers = load_customers()
         self.services = []
-        self.employees = []
+        self.employees = load_employees()
         self.appointments = []
 
     def find_customer(self, name):

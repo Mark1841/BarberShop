@@ -22,7 +22,12 @@ class Customer:
 
     @telephone_number.setter
     def telephone_number(self, telephone_number):
-        self._telephone_number = f'({telephone_number[:3]}) {telephone_number[3:6]}-{telephone_number[-4:]}'
+        if telephone_number.isdigit():
+            # Only format if it's all digits (e.g. 2896759388)
+            self._telephone_number = f'({telephone_number[:3]}) {telephone_number[3:6]}-{telephone_number[-4:]}'
+        else:
+            # Already formatted
+            self._telephone_number = telephone_number
 
     @property
     def email(self):
@@ -32,6 +37,24 @@ class Customer:
     def email(self, email):
         self._email = email
 
+
+    def to_csv_row(self):
+        return [
+            self.customer_id,
+            self.name,
+            self.telephone_number,
+            self.email,
+            ]
+
+    @staticmethod
+    def from_csv(row):
+        customer_id, name, telephone_number, email = row
+        customer = Customer(customer_id, name, telephone_number, email)
+        return customer
+
+
     def __str__(self):
         return f'Customer: {self.name}, Telephone Number: {self._telephone_number} (ID: {self.customer_id})'
+    
+
 
