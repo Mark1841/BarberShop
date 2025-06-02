@@ -17,8 +17,9 @@ class BarberShop:
     def find_customer(self, name):
         """ Finds a customer by name"""
         for customer in self.customers:
-            if customer.name == name:
-               return customer
+            if customer.name == name.title():
+                print(f'found customer: {customer}')
+                return customer
         return None
 
     def find_service(self, name):
@@ -31,7 +32,7 @@ class BarberShop:
     def find_employee(self, name):
         """ Finds an employee by name"""
         for employee in self.employees:
-            if employee.name == name:
+            if employee.name == name.title():
                return employee
         return None
 
@@ -71,4 +72,3 @@ class BarberShop:
         status = "Booked"
         new_appointment = Appointment(customer, service, employee, date, status)
         self.appointments.append(new_appointment)
-
