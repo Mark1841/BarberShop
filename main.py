@@ -1,5 +1,18 @@
+import sys
+
 from barberShop import BarberShop
 from dataHandler import save_customers, save_employees
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle(shop.name)
+        button_add_customer = QPushButton('Add Customer')
+        self.setCentralWidget(button_add_customer)
+
 
 def get_action():
     print('1. Add Customer')
@@ -14,6 +27,13 @@ def get_action():
 if __name__ == '__main__':
 
     shop = BarberShop('JanoCutz')
+
+    # Start of GUI Code
+    app = QApplication()
+    window = MainWindow()
+    window.show()
+    # End of GUI Code
+
     running = True
 
     while running:
