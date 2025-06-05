@@ -2,7 +2,7 @@ import sys
 
 from barberShop import BarberShop
 from dataHandler import save_customers, save_employees
-from PyQt6.QtWidgets import QApplication, QMainWindow, QGridLayout, QPushButton, QWidget, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QWidget, QLabel
 
 
 class MainWindow(QMainWindow):
@@ -18,16 +18,16 @@ class MainWindow(QMainWindow):
         button_quit = QPushButton("Quit")
         label_customer_name = QLabel("Customer Name: ")
 
-        layout_main = QGridLayout()
-        layout_main.addWidget(button_add_customer, 0, 0)
-        layout_main.addWidget(button_add_employee, 1, 0)
-        layout_main.addWidget(button_add_service, 2, 0)
-        layout_main.addWidget(button_book_appointment, 3, 0)
-        layout_main.addWidget(button_quit, 4, 0)
-        layout_main.addWidget(label_customer_name, 0, 2)
+        layout_vertical = QVBoxLayout()
+        layout_horizontal = QHBoxLayout()
+        layout_vertical.addWidget(button_add_customer)
+        layout_vertical.addWidget(button_add_employee)
+        layout_vertical.addWidget(button_add_service)
+        layout_vertical.addWidget(button_book_appointment)
+        layout_vertical.addWidget(button_quit)
 
         widget = QWidget()
-        widget.setLayout(layout_main)
+        widget.setLayout(layout_vertical)
         self.setCentralWidget(widget)
 
         button_quit.clicked.connect(self.close)
@@ -52,9 +52,10 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
+    app.exec()
     # End of GUI Code
 
-    running = True
+    running = False
 
     while running:
         match get_action():
@@ -82,8 +83,3 @@ if __name__ == '__main__':
 
     save_customers(shop.customers)
     save_employees(shop.employees)
-
-
-
-
-
