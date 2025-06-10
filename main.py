@@ -42,8 +42,3 @@ if __name__ == '__main__':
 
     save_customers(shop.customers)
     save_employees(shop.employees)
-
-
-
-
-
