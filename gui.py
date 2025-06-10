@@ -7,25 +7,40 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from barberShop import BarberShop
 
 
 class Ui_MainWindow(object):
-    # Just a trial function to check how connecting actions to buttons works
     def add_customer(self):
         self.stackedWidget.setCurrentIndex(2)
+        # Code here needs to connect the OKAY pushbutton to call the barbershop add customer method
+        # then the Barbershop add customer method needs to take the text from the lineEdit boxes and create a new customer object
+
+    def add_employee(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+    def add_service(self):
+        self.stackedWidget.setCurrentIndex(0)
+
+    def add_appointment(self):
+        self.stackedWidget.setCurrentIndex(1)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(926, 486)
+        MainWindow.resize(903, 550)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+        # Set properties for the main frame of the GUI
         self.frame_main = QtWidgets.QFrame(parent=self.centralwidget)
-        self.frame_main.setGeometry(QtCore.QRect(0, 10, 911, 461))
+        self.frame_main.setGeometry(QtCore.QRect(0, 10, 901, 511))
         self.frame_main.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.frame_main.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_main.setObjectName("frame_main")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_main)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+
+        # Set properties for frame on the left side if the GUI containing push buttons
         self.frame_left = QtWidgets.QFrame(parent=self.frame_main)
         self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -38,16 +53,12 @@ class Ui_MainWindow(object):
         self.frame_buttons.setObjectName("frame_buttons")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_buttons)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-
-        # Create frames for appointment buttons
         self.frame_appointments = QtWidgets.QFrame(parent=self.frame_buttons)
         self.frame_appointments.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.frame_appointments.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_appointments.setObjectName("frame_appointments")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_appointments)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-
-        # Create contents for appointment buttons frame
         self.label_appointment_buttons = QtWidgets.QLabel(parent=self.frame_appointments)
         font = QtGui.QFont()
         font.setBold(True)
@@ -66,16 +77,12 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
         self.horizontalLayout_2.addWidget(self.frame_appointments)
-
-        # Create frames for admin buttons
         self.frame_admin = QtWidgets.QFrame(parent=self.frame_buttons)
         self.frame_admin.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.frame_admin.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_admin.setObjectName("frame_admin")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.frame_admin)
         self.verticalLayout.setObjectName("verticalLayout")
-
-        # Craete contents for admin buttons frame
         self.label_admin_buttons = QtWidgets.QLabel(parent=self.frame_admin)
         font = QtGui.QFont()
         font.setBold(True)
@@ -268,6 +275,31 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_2)
         self.horizontalLayout.addWidget(self.stackedWidget)
         self.verticalLayout_4.addWidget(self.frame_6)
+        self.frame_ok_cancel = QtWidgets.QFrame(parent=self.frame_left)
+        self.frame_ok_cancel.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_ok_cancel.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_ok_cancel.setObjectName("frame_ok_cancel")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_ok_cancel)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.pushButton_okay = QtWidgets.QPushButton(parent=self.frame_ok_cancel)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_okay.sizePolicy().hasHeightForWidth())
+        self.pushButton_okay.setSizePolicy(sizePolicy)
+        self.pushButton_okay.setMinimumSize(QtCore.QSize(80, 30))
+        self.pushButton_okay.setObjectName("pushButton_okay")
+        self.horizontalLayout_4.addWidget(self.pushButton_okay)
+        self.pushButton_cancel = QtWidgets.QPushButton(parent=self.frame_ok_cancel)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_cancel.sizePolicy().hasHeightForWidth())
+        self.pushButton_cancel.setSizePolicy(sizePolicy)
+        self.pushButton_cancel.setMinimumSize(QtCore.QSize(80, 30))
+        self.pushButton_cancel.setObjectName("pushButton_cancel")
+        self.horizontalLayout_4.addWidget(self.pushButton_cancel)
+        self.verticalLayout_4.addWidget(self.frame_ok_cancel)
         self.horizontalLayout_3.addWidget(self.frame_left)
         self.frame_right = QtWidgets.QFrame(parent=self.frame_main)
         self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -303,9 +335,16 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # add actions to push buttons
-
+        # Assign push button actions
         self.pushButton_admin_add_customer.clicked.connect(self.add_customer)
+        self.pushButton_admin_add_employee.clicked.connect(self.add_employee)
+        self.pushButton_admin_add_service.clicked.connect(self.add_service)
+        self.pushButton_appointment_book.clicked.connect(self.add_appointment)
+
+
+
+    def add_customer(self):
+        self.stackedWidget.setCurrentIndex(2)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -335,8 +374,12 @@ class Ui_MainWindow(object):
         self.label_new_employee.setText(_translate("MainWindow", "Add New Employee"))
         self.label_employee_name.setText(_translate("MainWindow", "Name:"))
         self.label_employee_telephone.setText(_translate("MainWindow", "Telephone Number:"))
+        self.pushButton_okay.setText(_translate("MainWindow", "Okay"))
+        self.pushButton_cancel.setText(_translate("MainWindow", "Cancel"))
         self.label_shop_name.setText(_translate("MainWindow", "Baraber Shop Name"))
         self.label_appointments.setText(_translate("MainWindow", "Today\'s Appointments:"))
+
+
 
 
 if __name__ == "__main__":
@@ -346,4 +389,4 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    sys.exit(app.exec()) 
+    sys.exit(app.exec())

@@ -3,6 +3,7 @@ from customer import Customer
 from employee import Employee
 from service import Service
 from dataHandler import load_customers, load_employees
+from gui import Ui_MainWindow
 
 class BarberShop:
     """ Class to manage the day-to-day operations at the store"""
