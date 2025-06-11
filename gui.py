@@ -11,20 +11,6 @@ from barberShop import BarberShop
 
 
 class Ui_MainWindow(object):
-    def add_customer(self):
-        self.stackedWidget.setCurrentIndex(2)
-        # Code here needs to connect the OKAY pushbutton to call the barbershop add customer method
-        # then the Barbershop add customer method needs to take the text from the lineEdit boxes and create a new customer object
-
-    def add_employee(self):
-        self.stackedWidget.setCurrentIndex(3)
-
-    def add_service(self):
-        self.stackedWidget.setCurrentIndex(0)
-
-    def add_appointment(self):
-        self.stackedWidget.setCurrentIndex(1)
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(903, 550)
@@ -334,12 +320,6 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        # Assign push button actions
-        self.pushButton_admin_add_customer.clicked.connect(self.add_customer)
-        self.pushButton_admin_add_employee.clicked.connect(self.add_employee)
-        self.pushButton_admin_add_service.clicked.connect(self.add_service)
-        self.pushButton_appointment_book.clicked.connect(self.add_appointment)
 
 
 
