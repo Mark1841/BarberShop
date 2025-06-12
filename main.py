@@ -1,5 +1,5 @@
 from barberShop import BarberShop
-from dataHandler import save_customers, save_employees
+from dataHandler import save_customers, save_employees, save_appointments, save_services
 
 def get_action():
     print('1. Add Customer')
@@ -8,7 +8,7 @@ def get_action():
     print('4. Book Appointment')
     print('5. Quit \n')
 
-    return input('Enter your selectio 1-5 \n')
+    return input('Enter your selection 1-5: ')
 
 
 if __name__ == '__main__':
@@ -42,6 +42,8 @@ if __name__ == '__main__':
 
     save_customers(shop.customers)
     save_employees(shop.employees)
+    save_appointments(shop.appointments)
+    save_services(shop.services)
 
 
 

@@ -41,8 +41,8 @@ class Employee:
     @staticmethod
     def from_csv(row):
         employee_id, name, telephone_number, active = row
-        customer = Employee(employee_id, name, telephone_number, active)
-        return customer
+        employee = Employee(employee_id, name, telephone_number, active)
+        return employee
 
     def __str__(self):
         return f'Employee: {self.name}, Telephone Number: {self._telephone_number} (ID: {self.employee_id})'

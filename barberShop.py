@@ -2,7 +2,8 @@ from appointment import Appointment
 from customer import Customer
 from employee import Employee
 from service import Service
-from dataHandler import load_customers, load_employees
+from dataHandler import load_customers, load_employees, load_appointments, load_services
+from datetime import datetime, timedelta
 
 class BarberShop:
     """ Class to manage the day-to-day operations at the store"""
@@ -10,9 +11,9 @@ class BarberShop:
     def __init__(self, name):
         self.name = name # Name of the barber shop
         self.customers = load_customers()
-        self.services = []
+        self.services = load_services()
         self.employees = load_employees()
-        self.appointments = []
+        self.appointments = load_appointments(self.customers, self.services, self.employees)
 
     def find_customer(self, name):
         """ Finds a customer by name"""
@@ -63,7 +64,7 @@ class BarberShop:
         description = input('Enter service description: ')
         price = input('Enter service price: ')
         duration = input('Enter service duration: ')
-        new_service = Service(service_id, name, description, price, duration)
+        new_service = Service(service_id, name, description, price, int(duration))
         self.services.append(new_service)
 
     def add_appointment(self):
@@ -74,19 +75,85 @@ class BarberShop:
             print('Customer not found, they will need to be added to database!')
             self.add_customer(customer_name)
             customer = self.find_customer(customer_name)
+
         service_name = input('Enter the service the customer wants: ')
         service = self.find_service(service_name)
         if service is None:
             print('Service not found, it will need to be added to database!')
             self.add_service(service_name)
             service = self.find_service(service_name)
+            
         employee_name = input('Enter the name of the employee completing the service: ')
         employee = self.find_employee(employee_name)
         if employee is None:
             print('Employee not found, they will need to be added to database!')
             self.add_employee(employee_name)
             employee = self.find_employee(employee_name)
-        date = input('Enter the appointment date: ')
+        
+        while True:
+            # Calls get_valid_date to ensure the date is valid
+            date = get_valid_date()
+
+            # Current times being added at this moment
+            new_start = date
+            new_end = new_start + timedelta(minutes=int(service.duration))
+
+            conflict = False
+            for appointment in self.appointments:
+                if appointment.employee == employee:
+                    # Time that we are iterating through
+                    start = appointment.date
+                    print(type(appointment.service.duration))
+                    end = start + timedelta(minutes=int(appointment.service.duration))
+        
+                    if (new_start < end and new_end > start):
+                        print(f"ERROR: {employee.name} is already booked during this time.")
+                        conflict = True
+                        break
+                    
+            if not conflict:
+                break
+            else:
+                choice = input("Would you like to (1) change the time or (2) choose a different employee?: ")
+
+                if choice == '1':
+                    print("Please enter a new date and time.")
+                elif choice == '2':
+                    while True:
+                        employee_name = input('Enter the name of a different employee (or type "exit" to cancel): ')
+                        if employee_name.lower() == "exit":
+                            print("Appointment canceled.")
+                            return
+
+                        employee = self.find_employee(employee_name)
+                        if employee is None:
+                            print("Employee not found. Please enter a valid employee name or type 'exit' to cancel.")
+                        else:
+                            break
+
+
         status = "Booked"
         new_appointment = Appointment(customer, service, employee, date, status)
         (self.appointments.append(new_appointment))
+
+
+
+def get_valid_date():
+    while True:
+        try:
+            # Ask for input
+            date = input('Enter the appointment date (Format: YYYY-MM-DD): ')
+            time = input('Enter the appointment time (Format *24 Hour*: HH:MM): ')
+
+            # We need to combine the date and time so it fits the datetime format
+            # NOTE: datetime formate is 2025-06-05 14:30:00
+            appointment_datetime = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
+            
+            if appointment_datetime <= datetime.now():
+                print("ERROR: The appointment must be scheduled in the future. Please try again.")
+                continue
+
+            return appointment_datetime
+        except ValueError:
+            print("ERROR: Invalid date or time format. Please use the correct format (YYYY-MM-DD for date and HH:MM for time).")
+        
