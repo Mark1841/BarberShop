@@ -7,7 +7,6 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from barberShop import BarberShop
 
 
 class Ui_MainWindow(object):
@@ -16,8 +15,6 @@ class Ui_MainWindow(object):
         MainWindow.resize(903, 550)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-        # Set properties for the main frame of the GUI
         self.frame_main = QtWidgets.QFrame(parent=self.centralwidget)
         self.frame_main.setGeometry(QtCore.QRect(0, 10, 901, 511))
         self.frame_main.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
@@ -25,8 +22,6 @@ class Ui_MainWindow(object):
         self.frame_main.setObjectName("frame_main")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_main)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-
-        # Set properties for frame on the left side if the GUI containing push buttons
         self.frame_left = QtWidgets.QFrame(parent=self.frame_main)
         self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -321,11 +316,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
-
-    def add_customer(self):
-        self.stackedWidget.setCurrentIndex(2)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -358,15 +348,3 @@ class Ui_MainWindow(object):
         self.pushButton_cancel.setText(_translate("MainWindow", "Cancel"))
         self.label_shop_name.setText(_translate("MainWindow", "Baraber Shop Name"))
         self.label_appointments.setText(_translate("MainWindow", "Today\'s Appointments:"))
-
-
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())
